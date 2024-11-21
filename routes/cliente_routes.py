@@ -13,8 +13,7 @@ def registro_usuario():
     email = data['email']
     password = data['password']
 
-    # Generar la contraseña hasheada
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+  
 
     try:
         # Conectar a la base de datos y llamar al procedimiento almacenado
@@ -23,7 +22,7 @@ def registro_usuario():
         resultado = cursor.var(str)
         
         # Llamar al procedimiento almacenado
-        cursor.callproc('CREAR_CLIENTE_SP', [email,nombre,apellido,hashed_password,resultado])
+        cursor.callproc('CREAR_CLIENTE_SP', [email,nombre,apellido,password,resultado])
         mensaje = resultado.getvalue()
         conn.commit()
 
