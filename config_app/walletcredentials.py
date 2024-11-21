@@ -1,0 +1,6 @@
+uname = "ADMIN"
+pwd = "Optimuz2025$$"
+cdir = "config_db"
+wltloc = "config_db"
+wltpwd = "Optimuz2025$$"
+dsn = "logfel_low"
