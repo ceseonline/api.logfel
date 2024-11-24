@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-import bcrypt
 from oracledb import connect
 from config_app.connection import get_connection
 
