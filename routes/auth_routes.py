@@ -57,7 +57,6 @@ def check_token():
 @auth_bp.route('/logout', methods=['POST'])
 @jwt_required()
 def logout():
-    print(f"JWT Claims: {get_jwt()}")
     response = make_response(jsonify({"msg": "Logout exitoso"}), 200)
     unset_jwt_cookies(response)
     return response
