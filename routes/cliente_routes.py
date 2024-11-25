@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
 from oracledb import connect
 from config_app.connection import get_connection
 
@@ -11,21 +12,13 @@ def registro_usuario():
     apellido = data['apellido']
     email = data['email']
     password = data['password']
-
-  
-
     try:
-        # Conectar a la base de datos y llamar al procedimiento almacenado
         conn = get_connection()
         cursor = conn.cursor()
         resultado = cursor.var(str)
-        
-        # Llamar al procedimiento almacenado
         cursor.callproc('CREAR_CLIENTE_SP', [email,nombre,apellido,password,resultado])
         mensaje = resultado.getvalue()
         conn.commit()
-
         return jsonify({"message": mensaje})
     except Exception as e:
-        # Si ocurre un error, devolver mensaje de error
         return jsonify({"error": str(e)}), 400
